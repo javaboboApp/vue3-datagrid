@@ -7,6 +7,7 @@
         resize="false"
         :columns="headers"
         :editors="gridEditors"
+        :filter="filterConfigData"
         theme="material"
         @beforefocuslost="test"/>
     </div>
@@ -21,12 +22,14 @@ import VGrid, { VGridVueEditor, VGridVueTemplate } from '@revolist/vue-datagrid'
 import Editor from './Editor.vue';
 import Cell from './Cell.vue';
 import {generateFakeDataObject} from './dataService';
+import filterConfig from './FilterConfig.vue';
 
 
 export default defineComponent({
   data() {
     const cellTemplate = VGridVueTemplate(Cell);
-    return { ...generateFakeDataObject(100, 25, cellTemplate)};
+    const filterConfigData = filterConfig();
+    return { ...generateFakeDataObject(100, 25, cellTemplate), filterConfigData};
   },
   components: {
     VGrid
@@ -35,6 +38,7 @@ export default defineComponent({
     const button = VGridVueEditor(Editor);
     const gridEditors = { button };
     const grid = ref<Components.RevoGrid|null>(null);
+
     return { grid, gridEditors };
   },
   methods: {

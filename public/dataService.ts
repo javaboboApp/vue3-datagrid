@@ -17,6 +17,8 @@ function naturalSort(prop,a,b) {
   return a[prop].localeCompare(b[prop],"en",{numeric:true})
 }
 
+
+
 export function generateFakeDataObject(rowsNumber: number, colsNumber: number, cellTemplate: any) {
     const result: Record<any, any> = [];
     const columns: Record<number, any> = {};
@@ -42,6 +44,7 @@ export function generateFakeDataObject(rowsNumber: number, colsNumber: number, c
         result[row][col] = row + ':' + col;
     }
     let headers = Object.keys(columns).map((k) => columns[parseInt(k, 10)]);
+
     return {
       source: result,
       headers
